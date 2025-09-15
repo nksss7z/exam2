@@ -2,31 +2,22 @@ package main
 
 import (
 	"fmt"
-	"strconv"
+	"strings"
 )
 
-func ConcatLines(args ...interface{}) string {
-	var result string
-	for i, arg := range args {
-		switch v := arg.(type) {
-		case string:
-			result += v
-		case int:
-			result += strconv.Itoa(v)
-		default:
-			result += fmt.Sprintf("%v", v)
-		}
-		if i < len(args)-1 {
-			result += "\n"
-		}
+func assemblerEnChaine(args ...interface{}) string {
+	var lignes []string
+	for _, arg := range args {
+		lignes = append(lignes, fmt.Sprintf("%v", arg))
 	}
-	return result
+	return strings.Join(lignes, "\n")
 }
 
 func main() {
 	fmt.Println("Test 1:")
-	fmt.Println(ConcatLines("jouer", 42, "Go", 2025))
+	fmt.Println(assemblerEnChaine("Bonjour", 42, "Aurevoir"))
 
 	fmt.Println("\nTest 2:")
-	fmt.Println(ConcatLines(1, 2, 3))
+	fmt.Println(assemblerEnChaine(1, 2, 3, 4, 5))
+
 }
